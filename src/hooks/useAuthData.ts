@@ -1,6 +1,7 @@
-import { useAppDispatch} from "@/redux/reduxHook"
+import { useAppDispatch } from "@/redux/reduxHook"
 import { loginUser, logoutUser } from "@/redux/slice/authSlice"
 import { type LoginFormType } from '../schema/authFormShema'
+import { toast } from "react-toastify"
 // import { Route } from "react-router-dom"
 // import type { UseFormReturn } from "react-hook-form"
 
@@ -14,6 +15,7 @@ const UseAuth = () => {
         if (response.success) {
             reset()
             window.location.href = '/'
+            toast.success('User Logged in SuccessFully!!')
 
             localStorage.setItem('token', JSON.stringify(response.token))
         }

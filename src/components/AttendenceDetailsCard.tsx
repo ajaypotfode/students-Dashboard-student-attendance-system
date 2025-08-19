@@ -24,7 +24,11 @@ const AttendenceDetailsCard = ({ classData }: { classData: ClassResult | null })
                     <span className="text-gray-300">Attendance % :-</span>
                     {/* <span className={`font-bold ${>= 75 ? "text-green-400" : "text-yellow-400"}`}> */}
                     {classData && <span className={`font-bold`}>
-                        {(classData?.attendence / classData?.totalClass) * 100} %
+                        {
+                            classData.totalClass > 0 ?
+                                (classData?.attendence / classData?.totalClass) * 100
+                                : 0
+                        } %
                     </span>}
                 </div>
             </CardContent>

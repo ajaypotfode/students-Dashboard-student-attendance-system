@@ -1,4 +1,5 @@
 import { createSlice, isFulfilled, isPending, isRejected } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 interface CommonInitialState {
     classSearch: string,
@@ -87,6 +88,8 @@ const commonSlice = createSlice({
 
                 if (typeof action.payload === 'string') {
                     state.error[key] = action.payload
+
+                    toast.error(`${action.payload}`)
                 }
                 state.pages = { pageNum: 0, totalPages: 0 }
             })
