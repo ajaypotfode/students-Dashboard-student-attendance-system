@@ -49,52 +49,51 @@ export const isUserLoggedIn = createAsyncThunk<IsLoginUserResponse, void, { reje
 
 
 const initialState: InitialStateType = {
-    // signupData: { userName: "", role: "", email: "", password: "", image: "", contactNo: "" },
-    // loginData: { email: "", password: "" },
     isUserLogin: undefined,
+    isUserLoading: true,
     user: null
-    //     signupData: { userName: "", role: "", email: "", password: "", image: "", contactNo: "" },
-    //     loginData: { email: "", password: "" },
-    //     isUserLogin: undefined, // Use undefined to indicate unknown initially
-    //     user: null,
-    //     isAuthLoading: false,   // Add this line
-    // };
 }
 
 const authSlice = createSlice({
     name: 'auth',
     initialState,
-    reducers: {
-        getSignUpData: () => {
-            // state.signupData = action.payload
-        },
-        getLoginData: () => {
-            // state.loginData = action.payload
-        }
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder
+            .addCase(loginUser.pending, (state) => {
+                state.isUserLoading = true
+            })
             .addCase(loginUser.fulfilled, (state) => {
                 // state.loginData = { email: "", password: "" }
+                state.isUserLoading = false
                 state.isUserLogin = true
             })
-            .addCase(signupUser.fulfilled, () => {
-                // state.signupData = { userName: "", role: "", email: "", password: "", image: "", contactNo: "" }
-            })
-            .addCase(logoutUser.fulfilled, (state) => {
+            .addCase(loginUser.rejected, (state) => {
+                // state.loginData = { email: "", password: "" }
+                state.isUserLoading = false
                 state.isUserLogin = false
                 state.user = null
             })
+            .addCase(logoutUser.fulfilled, (state) => {
+                state.isUserLogin = false
+                state.isUserLoading=false
+                state.user = null
+            })
+            .addCase(isUserLoggedIn.pending, (state) => {
+                state.isUserLoading = true
+            })
             .addCase(isUserLoggedIn.fulfilled, (state, action) => {
                 state.isUserLogin = true
+                state.isUserLoading = false
                 state.user = action.payload.result || null
             })
             .addCase(isUserLoggedIn.rejected, (state) => {
                 state.isUserLogin = false;
+                state.isUserLoading = false
                 state.user = null;
                 // state.isAuthLoading = false;
             })
     }
 });
-export const { getSignUpData, getLoginData } = authSlice.actions;
+// export const { getSignUpData, getLoginData } = authSlice.actions;
 export default authSlice.reducer

@@ -6,6 +6,7 @@ import { generateClassQr, getActiveClasses, getAttendenceSummary, getClasses, se
 const UseClassData = () => {
     const dispatch = useAppDispatch();
     const { allClasses, activeClasses, attendenceSummary, qrData, currentClassId } = useAppSelector(state => state.classData)
+    const { loading } = useAppSelector(state => state.common)
 
 
     const fetchClasses = () => {
@@ -39,6 +40,7 @@ const UseClassData = () => {
         activeClasses,
         attendenceSummary,
         qrData,
+        loading
 
     }
 }

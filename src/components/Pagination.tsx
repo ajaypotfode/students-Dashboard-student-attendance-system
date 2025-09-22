@@ -7,44 +7,56 @@ import {
     PaginationNext,
     PaginationPrevious,
 } from "@/components/ui/pagination"
-import { Button } from "./ui/button"
 
-export function PaginationComponent({ pageNum, totalPage }: { pageNum: number, totalPage: number }) {
+interface PaginationProps {
+    pageNum: number,
+    totalPage: number,
+    getNextPage({ pageNum }: { pageNum?: number }): void
+}
+
+export const PaginationComponent: React.FC<PaginationProps> = ({ pageNum, totalPage, getNextPage }) => {
+
     return (
         <Pagination>
             <PaginationContent>
                 <PaginationItem>
-                    <PaginationPrevious className="bg-transparent border-0 hover:text-gray-500 text-white hover:bg-transparent focus-visible:ring-0 focus-visible:outline-none cursor-pointer">
-                        <Button
-                            variant="outline"
+                    {
+                        (pageNum >1) && <PaginationPrevious
+                            className="bg-transparent border-0 hover:text-gray-500 text-white hover:bg-transparent focus-visible:ring-0 focus-visible:outline-none cursor-pointer"
                             size="sm"
-                            // onClick={() => setPage((p) => Math.max(p - 1, 1))}
-                            // disabled={page === 1}
-                            className="bg-transparent border-0 hover:text-gray-500 text-white hover:bg-transparent focus-visible:ring-0 focus-visible:outline-none"
-                        >
-                            Previous
-                        </Button>
-                    </PaginationPrevious>
+                            onClickCapture={() => getNextPage({ pageNum: pageNum - 1 })}
+
+                        />
+                    }
                 </PaginationItem>
                 <PaginationItem>
                     <span className="text-sm text-muted-foreground">
-                        {pageNum} /{totalPage}
+                        {`${pageNum}/${totalPage}`}
                     </span>
                     {/* <PaginationLink href="#">1</PaginationLink> */}
                 </PaginationItem>
                 <PaginationItem>
-                    <PaginationNext className="bg-transparent border-0 hover:text-gray-500 text-white hover:bg-transparent focus-visible:ring-0 focus-visible:outline-none cursor-pointer">
+
+                    {
+                        pageNum !== totalPage && <PaginationNext
+                            className="bg-transparent border-0 hover:text-gray-500 text-white hover:bg-transparent focus-visible:ring-0 focus-visible:outline-none cursor-pointer"
+                            size="sm"
+                            onClickCapture={() => getNextPage({ pageNum: pageNum + 1 })}
+                        />
+
+                    }
+                    {/* <PaginationNext className="bg-transparent border-0 hover:text-gray-500 text-white hover:bg-transparent focus-visible:ring-0 focus-visible:outline-none cursor-pointer">
                         <Button
                             variant="outline"
                             size="sm"
                             // disabled
                             className="bg-transparent border-0 hover:text-gray-500 text-white hover:bg-transparent focus-visible:ring-0 focus-visible:outline-none"
-                        // onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
-                        // disabled={page === totalPages}
+                            onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
+                            disabled={page === totalPages}
                         >
                             Next
                         </Button>
-                    </PaginationNext>
+                    </PaginationNext> */}
                 </PaginationItem>
             </PaginationContent>
         </Pagination>

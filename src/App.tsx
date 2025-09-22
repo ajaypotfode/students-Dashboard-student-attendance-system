@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { useAppDispatch } from './redux/reduxHook'
 import { isUserLoggedIn } from './redux/slice/authSlice';
 import { ToastContainer } from 'react-toastify'
+import { BrowserRouter } from 'react-router-dom';
 // import { isLoginUser } from './redux/slice/authSlice'
 
 function App() {
@@ -12,24 +13,16 @@ function App() {
 
   useEffect(() => {
     dispatch(isUserLoggedIn())
-  })
+  },[])
 
   return (
-    <> <div className="react-toast mobile:text-md text-xs">
-      <ToastContainer position="top-right" autoClose={1000} />
-    </div>
-      <AppRoutes />
-      {/* <BrowserRouter> */}
-      {/* <Routes>
-          <Route path='/login' element={<Login />} />
-          <Route path='/' element={<CommonLayout />}>
-            <Route path='/dashboard' element={<Dashboard />} />
-            <Route path='/summary' element={<AttendenceSummary />} />
-            <Route path='/attendence' element={<AddAttendence />} />
-            <Route path='/notification' element={<Notification />} />
-          </Route>
-        </Routes> */}
-      {/* </BrowserRouter> */}
+    <>
+      <div className="react-toast mobile:text-md text-xs">
+        <ToastContainer position="top-right" autoClose={1000} />
+      </div>
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
 
     </>
   )

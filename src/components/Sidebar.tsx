@@ -20,6 +20,7 @@ import {
 import { cn } from "@/lib/utils"
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import UseCommonData from '@/hooks/useCommonData';
+import UseAuth from '@/hooks/useAuthData';
 
 const links = [
     { name: "Dashboard", icon: LayoutDashboard, path: "/dashboard" },
@@ -31,7 +32,8 @@ const links = [
 
 
 const Sidebar = () => {
-    const { handleSidebar, sidebar } = UseCommonData()
+    const { handleSidebar, sidebar } = UseCommonData();
+    const { user, getUserLogout } = UseAuth()
     return (
         // <div className={`min-h-screen md:bg-transparent md:border-0 border-r  border-gray-600 bg-gray-800  sidebar 2xl:w-60 w-48 md:shadow-md md:shadow-transparent  shadow-2xl shadow-black text-[] p-6 pr-0 pt-0 inline-block  transform  transition-transform duration-300 ease-in-out relative z-10`}>
         <div className={`min-h-screen sidebar 2xl:w-60 xl:w-48 w-60 text-[] pr-0 pt-2 inline-block  transform  transition-transform duration-300 ease-in-out relative z-10  md:bg-transparent md:border-0 border-r  border-gray-600 bg-gray-800 md:shadow-transparent  shadow-2xl shadow-black  ${sidebar ? "" : "inActive"} `}>
@@ -48,9 +50,9 @@ const Sidebar = () => {
                         <AvatarFallback>CN</AvatarFallback>
                     </Avatar>
                     <div className='flex-1 pl-2 text-start'>
-                        <p className='text-xs'>Ajay Potfode</p>
+                        <p className='text-xs'>{user?.userName}</p>
                         {/* <p className='text-[10px] text-gray-300'>ajay@gmail.com</p> */}
-                        <p className='text-[10px] text-gray-500'>Admin</p>
+                        <p className='text-[10px] text-gray-500'>{user?.role}</p>
                     </div>
                 </div>
                 <button className='absolute top-0 right-0 active-icon ' onClick={handleSidebar} >
@@ -81,7 +83,7 @@ const Sidebar = () => {
             </div>
             <div className="logout-btn-container  mb-5 w-full px-4  text-white  border-t border-gray-500 " >
                 <button
-                    // onClick={getUserLogout}
+                    onClick={getUserLogout}
                     className={` nav-items mt-2 flex items-center px-3 sm:py-3 py-2 rounded-lg w-full transition-all duration-300 group lg:hover:bg-black cursor-pointer`}
                 >
                     {/* <span className="nav-icons"></span> */}

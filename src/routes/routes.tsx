@@ -6,21 +6,26 @@ import Notification from '@/pages/notification/Notification'
 import AttendenceSummary from '@/pages/summary/AttendenceSummary'
 // import React from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
-// import ProtectedRoutes from './ProtectedRoutes'
+import ProtectedRoutes from './ProtectedRoutes'
+import PublicdRoutes from './PublicRote'
 
 const AppRoutes = () => {
     return (
         <Routes>
-            <Route path='/login' element={<Login />} />
-            {/* <Route element={<ProtectedRoutes />}> */}
-            <Route element={<CommonLayout />}>
-                <Route path='/' element={<Navigate to='/dashboard' />} />
-                <Route path='/dashboard' element={<Dashboard />} />
-                <Route path='/summary' element={<AttendenceSummary />} />
-                <Route path='/attendence' element={<AddAttendence />} />
-                <Route path='/notification' element={<Notification />} />
+            <Route path='/login' element={
+                <PublicdRoutes >
+                    <Login />
+                </PublicdRoutes>
+            } />
+            <Route element={<ProtectedRoutes />}>
+                <Route element={<CommonLayout />}>
+                    <Route path='/' element={<Navigate to='/dashboard' />} />
+                    <Route path='/dashboard' element={<Dashboard />} />
+                    <Route path='/summary' element={<AttendenceSummary />} />
+                    <Route path='/attendence' element={<AddAttendence />} />
+                    <Route path='/notification' element={<Notification />} />
+                </Route>
             </Route>
-            {/* </Route> */}
         </Routes>
     )
 }

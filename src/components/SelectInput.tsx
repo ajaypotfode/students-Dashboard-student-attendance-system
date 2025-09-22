@@ -9,17 +9,19 @@ import {
 } from "@/components/ui/select"
 import type { ActiveClassType, ClassResult } from "@/types/ClassTypes";
 import React, { useEffect } from "react";
+import { Spinner } from "./Spinner";
 
 interface SelectInputProps {
     getClassId({ classId }: { classId: string }): void;
     fetchClassData(): void,
-    classData: ClassResult[] | ActiveClassType[]
+    classData: ClassResult[] | ActiveClassType[],
+    loading: { [key: string]: boolean }
 }
 
 
 
 
-export const SelectInput: React.FC<SelectInputProps> = ({ getClassId, fetchClassData, classData }) => {
+export const SelectInput: React.FC<SelectInputProps> = ({ getClassId, fetchClassData, classData, loading }) => {
 
 
     useEffect(() => {
@@ -27,15 +29,18 @@ export const SelectInput: React.FC<SelectInputProps> = ({ getClassId, fetchClass
     }, [])
     return (
         <Select onValueChange={(value) => getClassId({ classId: value })} >
-            <SelectTrigger className="w-full text-white">
+            <SelectTrigger className="w-full text-white bg-gray-800 ">
                 <SelectValue placeholder="Select a Class" />
             </SelectTrigger>
-            <SelectContent>
-                <SelectGroup>
+            <SelectContent className="bg-gray-900">
+                <SelectGroup className="text-white">
                     {/* <SelectLabel>Role</SelectLabel> */}
-                    {classData && classData.map((c, index) => (
-                        <SelectItem key={index} value={c.classId._id}>{`${c.classId.className}-(${c.classId.time})`}</SelectItem>
-                    ))}
+                    {loading['getActiveClasses'] ? <Spinner /> : (classData.map((c, index) => (
+                        <SelectItem key={index} value={c.classId._id} >
+                            {`${c.classId.className}-(${c.classId.time})`}
+                        </SelectItem>
+                    )))
+                    }
                 </SelectGroup>
             </SelectContent>
         </Select>

@@ -5,13 +5,11 @@ import {
     // CardAction,
     CardContent,
     // CardDescription,
-    CardFooter,
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 // import { Label } from "@/components/ui/label"
-import { Link } from 'react-router-dom'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm} from "react-hook-form"
 // import { z } from "zod"
@@ -81,16 +79,10 @@ const Login = () => {
                                             </FormItem>
                                         )}
                                     />
-                                    <Button type="submit">Submit</Button>
+                                    <Button type="submit" className="bg-white text-black hover:bg-gray-400">Submit</Button>
                                 </form>
                             </Form>
                         </CardContent>
-                        <CardFooter className="flex-col gap-2 items-start ">
-                            {/* <Button type="submit" className="w-full">
-                                Login
-                            </Button> */}
-                            <p className='text-sm'>Don't have Account then,  <Link to='/signup' className='text-blue-500 underline'>Signup</Link></p>
-                        </CardFooter>
                     </Card>
 
                 </div>

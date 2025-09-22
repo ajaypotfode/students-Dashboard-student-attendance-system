@@ -1,30 +1,38 @@
 // import UseAuth from "@/hooks/useAuthData"
+import LoadingPage from "@/pages/loading/LoadingPage";
+import UnauthorizedPage from "@/pages/unAuthorized/UnAuthorizedPage";
 import { useAppSelector } from "@/redux/reduxHook"
-import { useEffect } from "react"
-import { Outlet, useNavigate } from "react-router-dom"
+// import { useEffect } from "react"
+import { Navigate, Outlet } from "react-router-dom"
 
 
 const ProtectedRoutes = () => {
-    const { isUserLogin, user } = useAppSelector(state => state.auth)
-    const navigate = useNavigate()
+    const { isUserLogin, user, isUserLoading } = useAppSelector(state => state.auth)
+    // const navigate = useNavigate()
 
-    useEffect(() => {
-        if (isUserLogin === false) {
-            navigate('/login')
-        }
-    }, [isUserLogin, navigate])
+    // useEffect(() => {
+    //     if (isUserLogin === false) {
+    //         navigate('/login')
+    //     }
+    // }, [isUserLogin, navigate])
 
-    if (isUserLogin === undefined) {
-        return <div className="text-white text-center mt-20">Loading...</div>;
+
+
+    if (isUserLoading) {
+        return <LoadingPage />
     }
 
-    if (!isUserLogin) {
-        return null;
+    if (isUserLogin === false) {
+        return <Navigate to='/login' />
     }
 
+
+    if (!user) {
+        return <UnauthorizedPage text="You Are Not Authorized Persion" />
+    }
 
     if (user?.status !== 'active') {
-        return <div className="text-red-500 text-center mt-10">Access Denied</div>;
+        return <UnauthorizedPage text="You Are Blocked By Organozation, Please Contact!!" />
     }
 
     return <Outlet />

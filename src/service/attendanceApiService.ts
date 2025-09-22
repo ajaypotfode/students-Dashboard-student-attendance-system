@@ -1,5 +1,5 @@
 import axios from "axios";
-import token from "./tokenService";
+// import token from "./tokenService";
 import type { ClassResponseType } from "@/types/ClassTypes";
 
 export const generateQrCode = async (): Promise<ClassResponseType> => {
@@ -10,7 +10,7 @@ export const generateQrCode = async (): Promise<ClassResponseType> => {
                 withCredentials: true,
                 headers: {
                     'Content-Type': "application/json",
-                    'Authorization': `Bearer ${token}`
+                    // 'Authorization': `Bearer ${token}`
                 }
             }
         )

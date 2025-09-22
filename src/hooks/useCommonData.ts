@@ -4,7 +4,7 @@ import { format } from 'date-fns'
 // import React, { useCallback } from 'react'
 
 const UseCommonData = () => {
-    const { classSearch, sidebar, pages,todaysDate } = useAppSelector(state => state.common)
+    const { classSearch, sidebar, pages, todaysDate, loading} = useAppSelector(state => state.common)
     // const {debouncing,search,}=UseCommonData()
     const dispatch = useAppDispatch()
 
@@ -34,7 +34,7 @@ const UseCommonData = () => {
     const handleSidebar = () => {
         dispatch(setSidebar())
     }
-    
+
 
     const todaysDateData = () => {
         const currentDate = new Date()
@@ -45,7 +45,7 @@ const UseCommonData = () => {
         dispatch(setTodaysDateData({ date, time }))
     }
 
-    
+
 
 
 
@@ -59,7 +59,8 @@ const UseCommonData = () => {
         handleSidebar,
         pages,
         todaysDateData,
-        todaysDate
+        todaysDate,
+        loading
     }
 }
 

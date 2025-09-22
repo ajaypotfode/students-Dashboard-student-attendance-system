@@ -1,5 +1,5 @@
 import axios from "axios";
-import token from "./tokenService";
+// import token from "./tokenService";
 import type { ActiveClassResponse, AttendanceSummaryParamsType, ClassResponseType, GetAttendenceSummaryResponse, QrResponseType } from "@/types/ClassTypes";
 
 export const getClassesAPI = async (): Promise<ClassResponseType> => {
@@ -10,7 +10,7 @@ export const getClassesAPI = async (): Promise<ClassResponseType> => {
                 withCredentials: true,
                 headers: {
                     'Content-Type': "application/json",
-                    'Authorization': `Bearer ${token}`
+                    // 'Authorization': `Bearer ${token}`
                 }
             }
         )
@@ -33,7 +33,7 @@ export const getActiveClassesAPI = async (): Promise<ActiveClassResponse> => {
                 withCredentials: true,
                 headers: {
                     'Content-Type': "application/json",
-                    'Authorization': `Bearer ${token}`
+                    // 'Authorization': `Bearer ${token}`
                 }
             }
         )
@@ -61,7 +61,7 @@ export const generateClassQrAPI = async (classId: string): Promise<QrResponseTyp
                 withCredentials: true,
                 headers: {
                     'Content-Type': "application/json",
-                    'Authorization': `Bearer ${token}`
+                    // 'Authorization': `Bearer ${token}`
                 }
             }
         )
@@ -90,7 +90,7 @@ export const getClassAttendenceSummaryAPI = async ({ classId, pageNum }: Attenda
                 withCredentials: true,
                 headers: {
                     'Content-Type': "application/json",
-                    'Authorization': `Bearer ${token}`
+                    // 'Authorization': `Bearer ${token}`
                 },
                 params
             }

@@ -4,16 +4,13 @@ import './index.css'
 import App from './App.tsx'
 // import "bootstrap-icons/font/bootstrap-icons.css";
 import 'bootstrap-icons/font/bootstrap-icons.css'
-import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './redux/store.ts'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </BrowserRouter>
+    <Provider store={store}>
+      <App />
+    </Provider>
   </StrictMode>,
 )
