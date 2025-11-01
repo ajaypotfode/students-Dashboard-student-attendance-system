@@ -20,8 +20,8 @@ const AddAttendence = () => {
           <AttendenceDetailsCard classData={qrData.classData} loading={loading} />
         </div>
         <div className="  p-7 rounded-2xl bg-gray-900 flex flex-1 justify-center flex-col items-center">
-         
-         
+
+
           {qrData.qrToken ? (
             <AttendenceQr data={qrData.qrToken} />
           ) : (

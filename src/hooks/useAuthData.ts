@@ -7,6 +7,7 @@ import { toast } from "react-toastify"
 
 const UseAuth = () => {
     const { user } = useAppSelector(state => state.auth)
+    const { loading } = useAppSelector(state => state.common)
     const dispatch = useAppDispatch()
 
     const getUserLogin = async (data: LoginFormType, reset: () => void) => {
@@ -32,7 +33,8 @@ const UseAuth = () => {
     return {
         getUserLogin,
         getUserLogout,
-        user
+        user,
+        loading
         // is
     }
 }

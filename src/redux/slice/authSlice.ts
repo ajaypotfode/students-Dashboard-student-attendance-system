@@ -60,23 +60,23 @@ const authSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(loginUser.pending, (state) => {
-                state.isUserLoading = true
-            })
-            .addCase(loginUser.fulfilled, (state) => {
-                // state.loginData = { email: "", password: "" }
-                state.isUserLoading = false
-                state.isUserLogin = true
-            })
-            .addCase(loginUser.rejected, (state) => {
-                // state.loginData = { email: "", password: "" }
-                state.isUserLoading = false
-                state.isUserLogin = false
-                state.user = null
-            })
+            // .addCase(loginUser.pending, (state) => {
+            //     state.isUserLoading = true
+            // })
+            // .addCase(loginUser.fulfilled, (state) => {
+            //     // state.loginData = { email: "", password: "" }
+            //     state.isUserLoading = false
+            //     state.isUserLogin = true
+            // })
+            // .addCase(loginUser.rejected, (state) => {
+            //     // state.loginData = { email: "", password: "" }
+            //     state.isUserLoading = false
+            //     state.isUserLogin = false
+            //     state.user = null
+            // })
             .addCase(logoutUser.fulfilled, (state) => {
                 state.isUserLogin = false
-                state.isUserLoading=false
+                state.isUserLoading = false
                 state.user = null
             })
             .addCase(isUserLoggedIn.pending, (state) => {

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import {
     LayoutDashboard,
@@ -17,7 +17,6 @@ import {
     SidebarClose,
     LogOut,
 } from "lucide-react"
-import { cn } from "@/lib/utils"
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import UseCommonData from '@/hooks/useCommonData';
 import UseAuth from '@/hooks/useAuthData';
@@ -65,17 +64,16 @@ const Sidebar = () => {
                         // const isActive = pathname === item.path
                         return (
                             <li key={idx}>
-                                <Link
+                                <NavLink
                                     to={item.path}
-                                    className={cn(
-                                        "flex items-center gap-2 px-3 py-2 rounded-md smallsc1:text-sm text-[12px] text-white",
-                                        // isActive ? "bg-gray-800 text-white" : "hover:bg-gray-800 text-gray-300"
-                                    )}
+                                    className={({ isActive }) => `flex items-center gap-2 px-3 py-2 rounded-md smallsc1:text-sm text-[12px] text-white
+                                        ${isActive ? "bg-gradient-to-bl from-gray-900 from-10% to-blue-950 to-60%" : ""}`
+                                    }
                                 >
                                     {/* <Bell */}
                                     <item.icon className="w-4 h-4" />
                                     {item.name}
-                                </Link>
+                                </NavLink>
                             </li>
                         )
                     })}

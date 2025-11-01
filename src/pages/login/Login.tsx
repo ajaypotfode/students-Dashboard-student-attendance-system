@@ -11,7 +11,7 @@ import {
 import { Input } from "@/components/ui/input"
 // import { Label } from "@/components/ui/label"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm} from "react-hook-form"
+import { useForm } from "react-hook-form"
 // import { z } from "zod"
 import {
     Form,
@@ -23,12 +23,13 @@ import {
 } from "@/components/ui/form"
 import { LoginFormSchema, type LoginFormType } from '@/schema/authFormShema'
 import UseAuth from '@/hooks/useAuthData'
+import { Spinner } from "@/components/Spinner"
 // import { useAppSelector } from '@/redux/reduxHook'
 
 
 const Login = () => {
     // const { loginData } = useAppSelector(state => state.auth)
-    const { getUserLogin } = UseAuth()
+    const { getUserLogin, loading } = UseAuth()
     const form = useForm<LoginFormType>({
         resolver: zodResolver(LoginFormSchema),
         defaultValues: {
@@ -47,41 +48,44 @@ const Login = () => {
                             <CardTitle>Login to your account</CardTitle>
                         </CardHeader>
                         <CardContent>
-                            <Form {...form}>
-                                <form onSubmit={form.handleSubmit((values) => getUserLogin(values, form.reset))} className="w-full space-y-6">
-                                    {/* <form className="w-full space-y-6"> */}
-                                    <FormField
-                                        control={form.control}
-                                        name="email"
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel>Email</FormLabel>
-                                                <FormControl>
-                                                    <Input
-                                                        placeholder="shadcn"
-                                                        {...field}
-                                                    />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-                                    <FormField
-                                        control={form.control}
-                                        name="password"
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel>Password</FormLabel>
-                                                <FormControl>
-                                                    <Input placeholder="shadcn" {...field} />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-                                    <Button type="submit" className="bg-white text-black hover:bg-gray-400">Submit</Button>
-                                </form>
-                            </Form>
+                            {
+                                loading['loginUser'] ? <Spinner /> :
+                                    <Form {...form}>
+                                        <form onSubmit={form.handleSubmit((values) => getUserLogin(values, form.reset))} className="w-full space-y-6">
+                                            {/* <form className="w-full space-y-6"> */}
+                                            <FormField
+                                                control={form.control}
+                                                name="email"
+                                                render={({ field }) => (
+                                                    <FormItem>
+                                                        <FormLabel>Email</FormLabel>
+                                                        <FormControl>
+                                                            <Input
+                                                                placeholder="shadcn"
+                                                                {...field}
+                                                            />
+                                                        </FormControl>
+                                                        <FormMessage />
+                                                    </FormItem>
+                                                )}
+                                            />
+                                            <FormField
+                                                control={form.control}
+                                                name="password"
+                                                render={({ field }) => (
+                                                    <FormItem>
+                                                        <FormLabel>Password</FormLabel>
+                                                        <FormControl>
+                                                            <Input placeholder="shadcn" {...field} />
+                                                        </FormControl>
+                                                        <FormMessage />
+                                                    </FormItem>
+                                                )}
+                                            />
+                                            <Button type="submit" className="bg-white text-black hover:bg-gray-400">Submit</Button>
+                                        </form>
+                                    </Form>
+                            }
                         </CardContent>
                     </Card>
 
