@@ -83,7 +83,9 @@ const commonSlice = createSlice({
                 // console.log("get Response In Matcher :", action.payload);
             })
             .addMatcher(isRejected, (state, action) => {
-                const key = action.type.replace('/reject', '');
+                const key = action.type.replace('/rejected', '');
+                console.log("failed Key Is :", key);
+
                 state.loading[key] = false;
 
                 if (typeof action.payload === 'string') {
