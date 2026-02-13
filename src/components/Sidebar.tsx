@@ -45,7 +45,7 @@ const Sidebar = () => {
                 >
                     {/* <span className="nav-icons"></span> */}
                     <Avatar className='border w-8 h-8'>
-                        <AvatarImage src="https://github.com/shadcn.png" className='border' alt="@shadcn" />
+                        <AvatarImage src={user?.image} className='border' alt="@shadcn" />
                         <AvatarFallback>CN</AvatarFallback>
                     </Avatar>
                     <div className='flex-1 pl-2 text-start'>
@@ -65,6 +65,7 @@ const Sidebar = () => {
                         return (
                             <li key={idx}>
                                 <NavLink
+                                onClick={handleSidebar} 
                                     to={item.path}
                                     className={({ isActive }) => `flex items-center gap-2 px-3 py-2 rounded-md smallsc1:text-sm text-[12px] text-white
                                         ${isActive ? "bg-gradient-to-bl from-gray-900 from-10% to-blue-950 to-60%" : ""}`

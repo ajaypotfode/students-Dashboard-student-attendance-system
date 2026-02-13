@@ -56,8 +56,8 @@ const AttendenceSummary = () => {
                                                             {/* <TableCell className="font-medium">Session-{index + 1}</TableCell> */}
                                                             <TableCell>{attendence.date}</TableCell>
                                                             <TableCell>{attendence.time}</TableCell>
-                                                            <TableCell className='text-center'>{attendence.present ? 'yes' : 'no'}</TableCell>
-                                                            <TableCell className="text-center">{!attendence.present ? 'yes' : 'no'}</TableCell>
+                                                            <TableCell className={`text-center ${attendence.present?'text-green-700':'text-red-700'}`}>{attendence.present ? 'yes' : 'no'}</TableCell>
+                                                            <TableCell className={`text-center ${!attendence.present?'text-green-700':'text-red-700'}`}>{!attendence.present ? 'yes' : 'no'}</TableCell>
                                                         </TableRow>
                                                     ))}
                                             </TableBody>

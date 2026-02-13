@@ -6,9 +6,6 @@ import type { AxiosError } from 'axios'
 export const loginUser = createAsyncThunk<LoginResponse, LoginData, { rejectValue: string }>('loginUser', async (loginData, { rejectWithValue }) => {
     try {
         const response = await loginUserAPI(loginData)
-        if (!response.success) {
-            rejectWithValue(response.message)
-        }
         return response
     } catch (error) {
         const err = error as AxiosError<{ message: string }>
@@ -19,9 +16,6 @@ export const loginUser = createAsyncThunk<LoginResponse, LoginData, { rejectValu
 export const signupUser = createAsyncThunk<SignupResponse, UserData, { rejectValue: string }>("signupUser", async (signupData, { rejectWithValue }) => {
     try {
         const response = await createUserAPI(signupData)
-        if (!response.success) {
-            rejectWithValue(response.message)
-        }
         return response
     } catch (error) {
         const err = error as AxiosError<{ message: string }>
@@ -45,9 +39,7 @@ export const logoutUser = createAsyncThunk<CommonResponse, void, { rejectValue: 
 export const isUserLoggedIn = createAsyncThunk<IsLoginUserResponse, void, { rejectValue: string }>('isLoginUser', async (_, { rejectWithValue }) => {
     try {
         const response = await isUserLoginAPI()
-        if (!response.success) {
-            rejectWithValue(response.message)
-        }
+
         return response
     } catch (error) {
         const err = error as AxiosError<{ message: string }>
