@@ -1,7 +1,8 @@
 import { useAppDispatch, useAppSelector } from "@/redux/reduxHook"
-import { loginUser, logoutUser } from "@/redux/slice/authSlice"
+import { loginUser,/* logoutUser*/ } from "@/redux/slice/authSlice"
 import { type LoginFormType } from '../schema/authFormShema'
 import { toast } from "react-toastify"
+import { removeAuthDataService } from "@/service/localStorageService"
 // import { Route } from "react-router-dom"
 // import type { UseFormReturn } from "react-hook-form"
 
@@ -23,11 +24,14 @@ const UseAuth = () => {
     }
 
     const getUserLogout = async () => {
-        const response = await dispatch(logoutUser()).unwrap();
+        // const response = await dispatch(logoutUser()).unwrap();
 
-        if (response.success) {
-            window.location.href = '/login'
-        }
+        // if (response.success) {
+        //     window.location.href = '/login'
+        // }
+      removeAuthDataService();
+        window.location.href = '/login';
+        toast.success("User Logout Successfully!!")
     }
 
     return {

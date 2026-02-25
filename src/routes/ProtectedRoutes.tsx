@@ -1,34 +1,16 @@
-// import UseAuth from "@/hooks/useAuthData"
-import LoadingPage from "@/pages/loading/LoadingPage";
 import UnauthorizedPage from "@/pages/unAuthorized/UnAuthorizedPage";
-import { useAppSelector } from "@/redux/reduxHook"
+import { getAuthDataService } from "@/service/localStorageService";
 // import { useEffect } from "react"
 import { Navigate, Outlet } from "react-router-dom"
 
 
 const ProtectedRoutes = () => {
-    const { isUserLogin, user, isUserLoading } = useAppSelector(state => state.auth)
-    // const navigate = useNavigate()
-
-    // useEffect(() => {
-    //     if (isUserLogin === false) {
-    //         navigate('/login')
-    //     }
-    // }, [isUserLogin, navigate])
+    // const { isUserLogin, user, isUserLoading } = useAppSelector(state => state.auth);
+    const { token, user } = getAuthDataService();
 
 
-
-    if (isUserLoading) {
-        return <LoadingPage />
-    }
-
-    if (isUserLogin === false) {
+    if (!token && !user) {
         return <Navigate to='/login' />
-    }
-
-
-    if (!user) {
-        return <UnauthorizedPage text="You Are Not Authorized Persion" />
     }
 
     if (user?.status !== 'active') {

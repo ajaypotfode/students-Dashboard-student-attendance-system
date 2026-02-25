@@ -1,49 +1,18 @@
-import axios from "axios";
-// import token from "./tokenService";
 import type { ActiveClassResponse, AttendanceSummaryParamsType, ClassResponseType, GetAttendenceSummaryResponse, QrResponseType } from "@/types/ClassTypes";
+import api from "@/api/axios";
 
 export const getClassesAPI = async (): Promise<ClassResponseType> => {
-    try {
-        const response = await axios.get<ClassResponseType>(
-            `${import.meta.env.VITE_BASE_URL}/student/get-classes`,
-            {
-                withCredentials: true,
-                headers: {
-                    'Content-Type': "application/json",
-                    // 'Authorization': `Bearer ${token}`
-                }
-            }
-        )
 
-        return response.data
-    } catch (error) {
-        console.log(error);
-        throw error
-
-    }
+    const response = await api.get<ClassResponseType>('/student/get-classes');
+    return response.data
 }
 
 
 
 export const getActiveClassesAPI = async (): Promise<ActiveClassResponse> => {
-    try {
-        const response = await axios.get<ActiveClassResponse>(
-            `${import.meta.env.VITE_BASE_URL}/student/active-classes`,
-            {
-                withCredentials: true,
-                headers: {
-                    'Content-Type': "application/json",
-                    // 'Authorization': `Bearer ${token}`
-                }
-            }
-        )
 
-        return response.data
-    } catch (error) {
-        console.log(error);
-        throw error
-
-    }
+    const response = await api.get<ActiveClassResponse>('/student/active-classes');
+    return response.data
 }
 
 
@@ -51,27 +20,10 @@ export const getActiveClassesAPI = async (): Promise<ActiveClassResponse> => {
 
 export const generateClassQrAPI = async (classId: string): Promise<QrResponseType> => {
 
-    const data = JSON.stringify({ classId })
+    const data = { classId }
 
-    try {
-        const response = await axios.post<QrResponseType>(
-            `${import.meta.env.VITE_BASE_URL}/qr/generate-qr`,
-            data,
-            {
-                withCredentials: true,
-                headers: {
-                    'Content-Type': "application/json",
-                    // 'Authorization': `Bearer ${token}`
-                }
-            }
-        )
-
-        return response.data
-    } catch (error) {
-        console.log(error);
-        throw error
-
-    }
+    const response = await api.post<QrResponseType>('/qr/generate-qr', data);
+    return response.data
 }
 
 
@@ -83,23 +35,7 @@ export const getClassAttendenceSummaryAPI = async ({ classId, pageNum }: Attenda
     if (classId?.trim()) params.classId = classId;
     if (pageNum) params.pageNum = pageNum;
 
-    try {
-        const response = await axios.get<GetAttendenceSummaryResponse>(
-            `${import.meta.env.VITE_BASE_URL}/student/attendence-summary`,
-            {
-                withCredentials: true,
-                headers: {
-                    'Content-Type': "application/json",
-                    // 'Authorization': `Bearer ${token}`
-                },
-                params
-            }
-        )
 
-        return response.data
-    } catch (error) {
-        console.log(error);
-        throw error
-
-    }
+    const response = await api.get<GetAttendenceSummaryResponse>('/student/attendence-summary', { params });
+    return response.data
 }

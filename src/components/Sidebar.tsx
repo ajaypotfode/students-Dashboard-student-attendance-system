@@ -20,6 +20,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import UseCommonData from '@/hooks/useCommonData';
 import UseAuth from '@/hooks/useAuthData';
+import { getAuthDataService } from '@/service/localStorageService';
 
 const links = [
     { name: "Dashboard", icon: LayoutDashboard, path: "/dashboard" },
@@ -32,7 +33,8 @@ const links = [
 
 const Sidebar = () => {
     const { handleSidebar, sidebar } = UseCommonData();
-    const { user, getUserLogout } = UseAuth()
+    const { getUserLogout } = UseAuth();
+    const { user } = getAuthDataService();
     return (
         // <div className={`min-h-screen md:bg-transparent md:border-0 border-r  border-gray-600 bg-gray-800  sidebar 2xl:w-60 w-48 md:shadow-md md:shadow-transparent  shadow-2xl shadow-black text-[] p-6 pr-0 pt-0 inline-block  transform  transition-transform duration-300 ease-in-out relative z-10`}>
         <div className={`min-h-screen sidebar 2xl:w-60 xl:w-48 w-60 text-[] pr-0 pt-2 inline-block  transform  transition-transform duration-300 ease-in-out relative z-10  md:bg-transparent md:border-0 border-r  border-gray-600 bg-gray-800 md:shadow-transparent  shadow-2xl shadow-black  ${sidebar ? "" : "inActive"} `}>
@@ -45,7 +47,7 @@ const Sidebar = () => {
                 >
                     {/* <span className="nav-icons"></span> */}
                     <Avatar className='border w-8 h-8'>
-                        <AvatarImage src={user?.image} className='border' alt="@shadcn" />
+                        <AvatarImage src='/images/demo-profile.png' className='border' alt="@shadcn" />
                         <AvatarFallback>CN</AvatarFallback>
                     </Avatar>
                     <div className='flex-1 pl-2 text-start'>
@@ -65,7 +67,7 @@ const Sidebar = () => {
                         return (
                             <li key={idx}>
                                 <NavLink
-                                onClick={handleSidebar} 
+                                    onClick={handleSidebar}
                                     to={item.path}
                                     className={({ isActive }) => `flex items-center gap-2 px-3 py-2 rounded-md smallsc1:text-sm text-[12px] text-white
                                         ${isActive ? "bg-gradient-to-bl from-gray-900 from-10% to-blue-950 to-60%" : ""}`

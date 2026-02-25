@@ -24,6 +24,7 @@ export interface SignupResponse extends CommonResponse {
         role: string,
         userName: string,
         email: string,
+        status: string,
         image: string,
         contactNo: string,
         _id: string,
@@ -45,10 +46,18 @@ export interface IsLoginUserResponse extends CommonResponse {
         role: string,
         status: string,
         userName: string,
-        image:string,
+        image: string,
         iat?: number,
         exp?: number
     }
+}
+
+export interface UserType {
+    role: string,
+    status: string,
+    userId: string,
+    image: string;
+    userName: string
 }
 
 
@@ -56,13 +65,7 @@ export interface InitialStateType {
     // signupData: UserData;
     // loginData: LoginData;
     isUserLogin: boolean | undefined;
-    isUserLoading:boolean,
+    isUserLoading: boolean,
     // role: string
-    user: {
-        role: string,
-        status: string,
-        userId: string,
-        image:string;
-        userName: string
-    } | null
+    user: UserType | null
 }

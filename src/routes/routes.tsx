@@ -7,7 +7,7 @@ import AttendenceSummary from '@/pages/summary/AttendenceSummary'
 // import React from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import ProtectedRoutes from './ProtectedRoutes'
-import PublicdRoutes from './PublicRote'
+import PublicdRoutes from './PublicRoute'
 
 const AppRoutes = () => {
     return (
