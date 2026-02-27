@@ -3,7 +3,7 @@ import api from "@/api/axios";
 
 export const getClassesAPI = async (): Promise<ClassResponseType> => {
 
-    const response = await api.get<ClassResponseType>('/student/get-classes');
+    const response = await api.get<ClassResponseType>('/student/get-classes', { cacheKey: 'get-classes' });
     return response.data
 }
 
@@ -11,7 +11,7 @@ export const getClassesAPI = async (): Promise<ClassResponseType> => {
 
 export const getActiveClassesAPI = async (): Promise<ActiveClassResponse> => {
 
-    const response = await api.get<ActiveClassResponse>('/student/active-classes');
+    const response = await api.get<ActiveClassResponse>('/student/active-classes', { cacheKey: 'get-active-classes' });
     return response.data
 }
 
@@ -28,7 +28,7 @@ export const generateClassQrAPI = async (classId: string): Promise<QrResponseTyp
 
 
 
-export const getClassAttendenceSummaryAPI = async ({ classId, pageNum }: AttendanceSummaryParamsType): Promise<GetAttendenceSummaryResponse> => {
+export const getClassAttendenceSummaryAPI = async ({ classId, pageNum = 1 }: AttendanceSummaryParamsType): Promise<GetAttendenceSummaryResponse> => {
     const params: AttendanceSummaryParamsType = {};
     // console.log('classId Is :', classId);
 
@@ -36,6 +36,9 @@ export const getClassAttendenceSummaryAPI = async ({ classId, pageNum }: Attenda
     if (pageNum) params.pageNum = pageNum;
 
 
-    const response = await api.get<GetAttendenceSummaryResponse>('/student/attendence-summary', { params });
+    const response = await api.get<GetAttendenceSummaryResponse>('/student/attendence-summary', {
+        params,
+        cacheKey: `get-classes-${classId}-${pageNum}`
+    })
     return response.data
 }
